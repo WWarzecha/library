@@ -6,7 +6,7 @@ body {
 
 .shelf {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     padding: 1rem;
 }
 
@@ -15,18 +15,25 @@ body {
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    height: 15rem;
-    width: 3rem;
+    height: 20rem;
+    width: 6rem;
     background-color: rosybrown;
     border: 2px solid rebeccapurple;
-    writing-mode:vertical-lr;
+    writing-mode:vertical-rl;
     padding: 1rem;
     overflow:hidden;
     color:gold;
+    gap: 1rem;
 }
 
 .divider {
-    width: 3rem;
+    width: 6rem;
     height: 0.5rem;
     background-color: goldenrod;
+}
+
+.author,
+.title {
+    /* word-wrap: break-word; */
+    /* word-break: break-all; */
 }
