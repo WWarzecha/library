@@ -13,30 +13,30 @@
     </div> 
     <div class="book-modal">
         <div class="modal-container">
-            <div class="modal-header">
-                Book Information
-                <button type="button" class="close-modal">X</button>
-            </div>
-            <div class="modal-form">
-                <span class="title">Change Values Below:</span>
-                <span>Title:</span>
-                <input type="text" name="author" id="author">
-                <span>Author:</span>
-                <input type="text" name="title" id="title">
-                <span>Number of pages:</span>
-                <input type="text" name="pages" id="pages">
-                <span>Was it read already?</span>
-                <div class="checkbox">
-                    <input type="radio" name="is-read" id="yes" class="inline">
-                    Yes
-                    <input type="radio" name="is-read" id="no" class="inline">
-                    No
+            <form>
+                <div class="modal-header">
+                    Book Information
+                    <button type="reset" class="close-modal">X</button>
                 </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="save-book">Save</button>
-            </div>
+                <div class="modal-form">
+                    <span class="title">Change Values Below:</span>
+                    <span>Title:</span>
+                    <input type="text" class="form-title">
+                    <span>Author:</span>
+                    <input type="text" class="form-author">
+                    <span>Number of pages:</span>
+                    <input type="text" class="form-pages">
+                    <span>Was it read already?</span>
+                    <div class="checkbox">
+                        <label for="radio"><input type="radio" name="is-read" class="form-is-read-yes">Yes</label>
+                        <label for="radio"><input type="radio" name="is-read" class="form-is-read-no">No</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="save-book-button">Save</button>
+                </div>
+            </form>
+            
         </div>
         
     </div>

@@ -1,4 +1,10 @@
-let books = []
+let books = [];
+const formFields = {
+    titleField: document.querySelector(".form-title"),
+    authorField: document.querySelector(".form-author"),
+    pagesField: document.querySelector(".form-pages"),
+    isRead: document.querySelector(".form-is-read-yes"),
+};
 
 function Book(title = "title unknown", author = "author unknown", pages = "unknown number of ", isRead = false){
     this.title = title;
@@ -20,19 +26,23 @@ Book.prototype.createBookDiv = function(){
     title.classList.add("title");
     title.textContent = this.title;
 
-    const divider1 = document.createElement('div');
-    divider1.classList.add("divider");
+    const divider = document.createElement('div')
+    divider.classList.add("divider");
 
-    const divider2 = document.createElement('div');
-    divider2.classList.add("divider");
+    const dividerLine1 = document.createElement('div');
+    dividerLine1.classList.add("divider-line");
+    const dividerLine2 = document.createElement('div');
+    dividerLine2.classList.add("divider-line");
+
+    divider.appendChild(dividerLine1);
+    divider.appendChild(dividerLine2);
 
     const author = document.createElement('div');
     author.classList.add("author");
     author.textContent = this.author;
 
     book.appendChild(title);
-    book.appendChild(divider1);
-    book.appendChild(divider2);
+    book.appendChild(divider);
     book.appendChild(author);
 
     this.bookDiv = book;
@@ -56,7 +66,7 @@ function hideBookModal(){
 
 // create book
 // open form
-
+// get data from form
 // if submit : change new book info
 //           : rerender books
 
@@ -65,28 +75,43 @@ function hideBookModal(){
 // clear form
 
 function addBook(){
-    let book = new Book();
-    books.push(book);
-    showBookModal();
+    let title = formFields.titleField.value;
+    let author = formFields.authorField.value;
+    let pages = formFields.pagesField.value;
+    let isRead = formFields.isRead.checked;
+    books.push(new Book(title, author, pages, isRead));
+    resetModal();
+    renderBooks();
+}
 
-    // renderBooks();
-    console.log("book added");
+function resetModal(){
+    formFields.titleField.value;
+    formFields.authorField.value;
+    formFields.pagesField.value;
+    formFields.isRead.checked;
+}
+
+const shelf = document.querySelector(".shelf")
+
+
+const addButton = document.querySelector(".add-button")
+addButton.addEventListener("click", showBookModal);
+
+const saveButton = document.querySelector(".save-book-button");
+saveButton.onclick = addBook;
+
+const bookModal = document.querySelector(".book-modal");
+const closeModalButton = document.querySelector(".close-modal");
+
+window.onclick = function(event) {
+    if (event.target == bookModal || event.target == closeModalButton || event.target == saveButton) {
+      hideBookModal();
+      resetModal();
+    };
 };
 
 
-
-let shelf = document.querySelector(".shelf")
 
 books = [...Array(5)].map(() => new Book());
 renderBooks(books);
-
-let addButton = document.querySelector(".add-button")
-addButton.addEventListener("click", addBook);
-
-let bookModal = document.querySelector(".book-modal");
-
-window.onclick = function(event) {
-    if (event.target == bookModal) {
-      hideBookModal();
-    };
-};
+console.log(formFields)

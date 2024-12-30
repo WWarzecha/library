@@ -49,6 +49,7 @@ body {
 .close-modal:hover {
     color: inherit;
     background-color: lightslategray;
+    cursor: pointer;
 }
 
 .modal-form {
@@ -90,6 +91,11 @@ body {
 }
 
 .divider {
+    display: flex;
+    gap: 5px;
+}
+
+.divider-line {
     width: 6rem;
     height: 0.5rem;
     background-color: gold;
