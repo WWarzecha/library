@@ -63,36 +63,16 @@ function hideBookModal(){
     bookModal.style.display = "none";
 }
 
-
-// create book
-// open form
-// get data from form
-// if submit : change new book info
-//           : rerender books
-
-// if cancel : remove book
-
-// clear form
-
 function addBook(){
     let title = formFields.titleField.value;
     let author = formFields.authorField.value;
     let pages = formFields.pagesField.value;
     let isRead = formFields.isRead.checked;
     books.push(new Book(title, author, pages, isRead));
-    resetModal();
     renderBooks();
 }
 
-function resetModal(){
-    formFields.titleField.value;
-    formFields.authorField.value;
-    formFields.pagesField.value;
-    formFields.isRead.checked;
-}
-
 const shelf = document.querySelector(".shelf")
-
 
 const addButton = document.querySelector(".add-button")
 addButton.addEventListener("click", showBookModal);
@@ -106,7 +86,6 @@ const closeModalButton = document.querySelector(".close-modal");
 window.onclick = function(event) {
     if (event.target == bookModal || event.target == closeModalButton || event.target == saveButton) {
       hideBookModal();
-      resetModal();
     };
 };
 
