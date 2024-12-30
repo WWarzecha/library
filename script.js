@@ -11,14 +11,29 @@ function Book(title = "title unknown", author = "author unknown", pages = "unkno
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
-    this.bookDiv = null;
+    this.bookContainer = null;
 };
 
 Book.prototype.info = function(){
     return `${this.title} by ${this.author}, ${this.pages} pages, ${(this.isRead) ? "already read" : "not read yet"}`;
 };
 
-Book.prototype.createBookDiv = function(){
+Book.prototype.createbookContainer = function(){
+    const bookContainer = document.createElement('div');
+    bookContainer.classList.add("book-container");
+
+    const removeBookButton = document.createElement('button');
+    removeBookButton.classList.add("remove-book-button");
+    removeBookButton.onclick = () => {
+        books.splice(books.indexOf(this));
+        bookContainer.remove();
+    };
+    removeBookButton.type = "button";
+    removeBookButton.textContent = "Remove";
+
+    bookContainer.appendChild(removeBookButton);
+
+
     const book = document.createElement('div');
     book.classList.add("book");
 
@@ -45,13 +60,15 @@ Book.prototype.createBookDiv = function(){
     book.appendChild(divider);
     book.appendChild(author);
 
-    this.bookDiv = book;
+    bookContainer.appendChild(book);
+
+    this.bookContainer = bookContainer;
 };
 
 function renderBooks(){
     books.forEach(book => {
-        if(!(book.bookDiv)) book.createBookDiv();
-        shelf.appendChild(book.bookDiv);
+        if(!(book.bookContainer)) book.createbookContainer();
+        shelfBooks.appendChild(book.bookContainer);
     });
 };
 
@@ -72,7 +89,7 @@ function addBook(){
     renderBooks();
 }
 
-const shelf = document.querySelector(".shelf")
+const shelfBooks = document.querySelector(".shelf-books")
 
 const addButton = document.querySelector(".add-button")
 addButton.addEventListener("click", showBookModal);
@@ -90,7 +107,5 @@ window.onclick = function(event) {
 };
 
 
-
 books = [...Array(5)].map(() => new Book());
 renderBooks(books);
-console.log(formFields)

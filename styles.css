@@ -5,6 +5,7 @@ body {
 }
 
 
+
 .book-modal {
     display: none;
     z-index: 1;
@@ -66,10 +67,35 @@ body {
     font-size: 1.1rem;
 }
 
-.shelf {
+.shelf-books {
     display: flex;
     gap: 1rem;
     padding: 1rem;
+}
+
+.book-container {
+    min-width: 3rem;
+    padding: 3rem 1rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.remove-book-button {
+    border: 2px solid rgb(175, 66, 66);
+    border-radius: 0.3rem;
+    background-color: lightgray;
+    color: rgb(175, 66, 66);
+    font-weight: 700;
+    vertical-align: middle;
+    padding: 0.3rem;
+}
+
+.remove-book-button:hover {
+    cursor: pointer;
+    background-color: rgb(83, 51, 51);
+    border-color: rgb(223, 187, 187);
+    color: rgb(223, 187, 187);
 }
 
 .book {
@@ -78,7 +104,6 @@ body {
     justify-content: space-between;
     box-sizing: border-box;
     height: 20rem;
-    width: 6rem;
     background-color: #cca98d;
     border: 4px solid gold;
     writing-mode:vertical-rl;
@@ -88,15 +113,17 @@ body {
     font-size: 1.2rem;
     font-weight: 700;
     gap: 1rem;
+    width: 100%;
 }
 
 .divider {
     display: flex;
     gap: 5px;
+    width: calc(100% + 1rem);
 }
 
 .divider-line {
-    width: 6rem;
+    width: 100%;
     height: 0.5rem;
     background-color: gold;
 }
