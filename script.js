@@ -10,7 +10,7 @@ function Book(title = "title unknown", author = "author unknown", pages = "unkno
 
 Book.prototype.info = function(){
     return `${this.title} by ${this.author}, ${this.pages} pages, ${(this.isRead) ? "already read" : "not read yet"}`;
-}
+};
 
 Book.prototype.createBookDiv = function(){
     const book = document.createElement('div');
@@ -38,16 +38,55 @@ Book.prototype.createBookDiv = function(){
     this.bookDiv = book;
 };
 
-function renderBooks(books){
+function renderBooks(){
     books.forEach(book => {
         if(!(book.bookDiv)) book.createBookDiv();
         shelf.appendChild(book.bookDiv);
     });
+};
+
+function showBookModal(){
+    bookModal.style.display = "flex";
 }
+
+function hideBookModal(){
+    bookModal.style.display = "none";
+}
+
+
+// create book
+// open form
+
+// if submit : change new book info
+//           : rerender books
+
+// if cancel : remove book
+
+// clear form
+
+function addBook(){
+    let book = new Book();
+    books.push(book);
+    showBookModal();
+
+    // renderBooks();
+    console.log("book added");
+};
+
+
+
 let shelf = document.querySelector(".shelf")
 
 books = [...Array(5)].map(() => new Book());
-// console.log(new Book());
-console.log(books);
 renderBooks(books);
-books[4].bookDiv.remove();
+
+let addButton = document.querySelector(".add-button")
+addButton.addEventListener("click", addBook);
+
+let bookModal = document.querySelector(".book-modal");
+
+window.onclick = function(event) {
+    if (event.target == bookModal) {
+      hideBookModal();
+    };
+};

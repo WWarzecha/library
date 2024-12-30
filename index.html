@@ -7,43 +7,39 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+    <button class="add-button" type="button">Add Book</button>
     <div class="library">
-        <!-- (.book>(.title+.author))*5 -->
-        <div class="shelf">
-            <!-- (.book>.title{Book title$}+.divider*2+.author{Author$})*5 -->
-            <!-- <div class="book">
-                <div class="title">Book title1</div>
-                <div class="divider"></div>
-                <div class="divider"></div>
-                <div class="author">Author1</div>
+        <div class="shelf"></div>
+    </div> 
+    <div class="book-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                Book Information
+                <button type="button" class="close-modal">X</button>
             </div>
-            <div class="book">
-                <div class="title">Book title2</div>
-                <div class="divider"></div>
-                <div class="divider"></div>
-                <div class="author">Author2</div>
+            <div class="modal-form">
+                <span class="title">Change Values Below:</span>
+                <span>Title:</span>
+                <input type="text" name="author" id="author">
+                <span>Author:</span>
+                <input type="text" name="title" id="title">
+                <span>Number of pages:</span>
+                <input type="text" name="pages" id="pages">
+                <span>Was it read already?</span>
+                <div class="checkbox">
+                    <input type="radio" name="is-read" id="yes" class="inline">
+                    Yes
+                    <input type="radio" name="is-read" id="no" class="inline">
+                    No
+                </div>
+                
             </div>
-            <div class="book">
-                <div class="title">Book title3</div>
-                <div class="divider"></div>
-                <div class="divider"></div>
-                <div class="author">Author3</div>
+            <div class="modal-footer">
+                <button type="button" class="save-book">Save</button>
             </div>
-            <div class="book">
-                <div class="title">Book title4</div>
-                <div class="divider"></div>
-                <div class="divider"></div>
-                <div class="author">Author4</div>
-            </div>
-            <div class="book">
-                <div class="title">Book title5</div>
-                <div class="divider"></div>
-                <div class="divider"></div>
-                <div class="author">Author5</div>
-            </div>
-        </div> -->
+        </div>
         
-    
+    </div>
     <script src="./script.js"></script>
 </body>
 </html>
