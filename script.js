@@ -6,7 +6,7 @@ const formFields = {
     isRead: document.querySelector(".form-is-read-yes"),
 };
 
-function Book(title = "title unknown", author = "author unknown", pages = "unknown number of ", isRead = false){
+function Book(title = "title unknown", author = "author unknown", pages = "<3", isRead = false){
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -40,6 +40,7 @@ Book.prototype.createbookContainer = function(){
     const title = document.createElement('div');
     title.classList.add("title");
     title.textContent = this.title;
+    book.appendChild(title);
 
     const divider = document.createElement('div')
     divider.classList.add("divider");
@@ -51,14 +52,18 @@ Book.prototype.createbookContainer = function(){
 
     divider.appendChild(dividerLine1);
     divider.appendChild(dividerLine2);
+    book.appendChild(divider);
+
 
     const author = document.createElement('div');
     author.classList.add("author");
     author.textContent = this.author;
-
-    book.appendChild(title);
-    book.appendChild(divider);
     book.appendChild(author);
+    
+    const pages = document.createElement('div');
+    pages.classList.add("pages");
+    pages.textContent = this.pages;
+    book.appendChild(pages);
 
     bookContainer.appendChild(book);
 
