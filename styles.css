@@ -85,6 +85,16 @@ body {
     font-size: 1.1rem;
 }
 
+.radio-div {
+    display: flex;
+    gap: 1rem;
+    padding: 0.2rem 0;
+}
+
+.radio-label:hover {
+    cursor: pointer;
+}
+
 .shelf-books {
     display: flex;
     flex-wrap: wrap;
