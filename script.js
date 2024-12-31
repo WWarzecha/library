@@ -22,6 +22,7 @@ Book.prototype.createbookContainer = function(){
     const bookContainer = document.createElement('div');
     bookContainer.classList.add("book-container");
 
+    // Remove button
     const removeBookButton = document.createElement('button');
     removeBookButton.classList.add("remove-book-button");
     removeBookButton.onclick = () => {
@@ -33,7 +34,24 @@ Book.prototype.createbookContainer = function(){
 
     bookContainer.appendChild(removeBookButton);
 
+    // isRead checkbox
+    const isReadSpan = document.createElement("span");
+    isReadSpan.classList.add("is-read-span");
 
+    const isReadCheckbox = document.createElement("input");
+    isReadCheckbox.type = "checkbox";
+    isReadSpan.textContent = "Was it read?";
+
+    isReadCheckbox.onclick = () => {
+        console.log("zmieniaj sie")
+        this.isRead = isReadCheckbox.checked;
+    };
+
+    isReadSpan.appendChild(isReadCheckbox);
+
+    
+    bookContainer.appendChild(isReadSpan);
+    // bookDiv
     const book = document.createElement('div');
     book.classList.add("book");
 
