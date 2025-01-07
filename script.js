@@ -94,20 +94,41 @@ class Book{
     };
 };
 
+class Modal{
+    DOMModal;
+    closeModalButton;
+    saveButton;
+    constructor(){
+        this.DOMModal = document.querySelector(".book-modal");
+        this.closeModalButton = document.querySelector(".close-modal");
+        this.saveButton = document.querySelector(".save-book-button");
+        this.saveButton.onclick = addBook;
+        window.onclick = (event) => {
+            if (event.target == this.DOMModal || event.target == this.closeModalButton || event.target == this.saveButton) {
+              this.hideBookModal();
+            };
+        };
+        
+    };
+    showBookModal = () => {
+        this.DOMModal.style.display = "flex";
+    };
+    hideBookModal = () => {
+        this.DOMModal.style.display = "none";
+    };
+    get DOMModal(){
+        return this.DOMModal;
+    };
+}
+
+modal = new Modal();
+
 function renderBooks(){
     books.forEach(book => {
         if(!(book.bookContainer)) book.createbookContainer();
         shelfBooks.appendChild(book.bookContainer);
     });
 };
-
-function showBookModal(){
-    bookModal.style.display = "flex";
-}
-
-function hideBookModal(){
-    bookModal.style.display = "none";
-}
 
 function addBook(){
     let title = formFields.titleField.value;
@@ -121,20 +142,7 @@ function addBook(){
 const shelfBooks = document.querySelector(".shelf-books")
 
 const addButton = document.querySelector(".add-button")
-addButton.addEventListener("click", showBookModal);
-
-const saveButton = document.querySelector(".save-book-button");
-saveButton.onclick = addBook;
-
-const bookModal = document.querySelector(".book-modal");
-const closeModalButton = document.querySelector(".close-modal");
-
-window.onclick = function(event) {
-    if (event.target == bookModal || event.target == closeModalButton || event.target == saveButton) {
-      hideBookModal();
-    };
-};
-
+addButton.addEventListener("click", modal.showBookModal);
 
 books = [...Array(5)].map(() => new Book());
 renderBooks(books);
