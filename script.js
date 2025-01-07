@@ -1,29 +1,22 @@
-let books = [];
-const formFields = {
-    titleField: document.querySelector(".form-title"),
-    authorField: document.querySelector(".form-author"),
-    pagesField: document.querySelector(".form-pages"),
-    isRead: document.querySelector(".form-is-read-yes"),
-};
-
-
 class Book{
     title;
     author;
     pages;
     isRead;
     bookContainer = null;
-    constructor(title = "title unknown", author = "author unknown", pages = "<3", isRead = false){
+    shelf;
+    constructor(title = "title unknown", author = "author unknown", pages = "<3", isRead = false, shelf){
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.isRead = isRead;
         this.bookContainer = null;
+        this.shelf = shelf;
     };
-    info(){
+    info = () => {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${(this.isRead) ? "already read" : "not read yet"}`;
     }
-    createbookContainer = function(){
+    createbookContainer = function() {
         const bookContainer = document.createElement('div');
         bookContainer.classList.add("book-container");
     
@@ -31,7 +24,7 @@ class Book{
         const removeBookButton = document.createElement('button');
         removeBookButton.classList.add("remove-book-button");
         removeBookButton.onclick = () => {
-            books.splice(books.indexOf(this));
+            shelf.removeBook(this);
             bookContainer.remove();
         };
         removeBookButton.type = "button";
@@ -45,10 +38,10 @@ class Book{
     
         const isReadCheckbox = document.createElement("input");
         isReadCheckbox.type = "checkbox";
+        isReadCheckbox.checked = this.isRead;
         isReadSpan.textContent = "Was it read?";
     
         isReadCheckbox.onclick = () => {
-            console.log("zmieniaj sie")
             this.isRead = isReadCheckbox.checked;
         };
     
@@ -98,17 +91,16 @@ class Modal{
     DOMModal;
     closeModalButton;
     saveButton;
-    constructor(){
+    constructor(shelf){
         this.DOMModal = document.querySelector(".book-modal");
         this.closeModalButton = document.querySelector(".close-modal");
         this.saveButton = document.querySelector(".save-book-button");
-        this.saveButton.onclick = addBook;
+        this.saveButton.onclick = shelf.addBook;
         window.onclick = (event) => {
             if (event.target == this.DOMModal || event.target == this.closeModalButton || event.target == this.saveButton) {
               this.hideBookModal();
             };
         };
-        
     };
     showBookModal = () => {
         this.DOMModal.style.display = "flex";
@@ -121,28 +113,48 @@ class Modal{
     };
 }
 
-modal = new Modal();
 
-function renderBooks(){
-    books.forEach(book => {
-        if(!(book.bookContainer)) book.createbookContainer();
-        shelfBooks.appendChild(book.bookContainer);
-    });
+class Shelf{
+    DOMshelf;
+    books = [...Array(5)].map(() => new Book());
+    addButton;
+    modal;
+    formFields; 
+    constructor(){
+        this.DOMshelf = document.querySelector(".shelf-books");
+        this.addButton = document.querySelector(".add-button");
+        this.formFields = {
+            titleField: document.querySelector(".form-title"),
+            authorField: document.querySelector(".form-author"),
+            pagesField: document.querySelector(".form-pages"),
+            isRead: document.querySelector(".form-is-read-yes"),
+        };
+    }
+    renderBooks = () => {
+        this.books.forEach(book => {
+            if(!(book.bookContainer)) book.createbookContainer();
+            this.DOMshelf.appendChild(book.bookContainer);
+        });
+    };
+    addBook = () => {
+        let title = this.formFields.titleField.value;
+        let author = this.formFields.authorField.value;
+        let pages = this.formFields.pagesField.value;
+        let isRead = this.formFields.isRead.checked;
+        console.log(this.formFields.isRead.checked);
+        this.books.push(new Book(title, author, pages, isRead));
+        this.renderBooks();
+    };
+    removeBook = (book) => {
+        this.books.splice(this.books.indexOf(book));
+    }
+    setModal = (modal) => {
+        this.modal = modal;
+        this.addButton.addEventListener("click", modal.showBookModal);
+    }
 };
 
-function addBook(){
-    let title = formFields.titleField.value;
-    let author = formFields.authorField.value;
-    let pages = formFields.pagesField.value;
-    let isRead = formFields.isRead.checked;
-    books.push(new Book(title, author, pages, isRead));
-    renderBooks();
-}
-
-const shelfBooks = document.querySelector(".shelf-books")
-
-const addButton = document.querySelector(".add-button")
-addButton.addEventListener("click", modal.showBookModal);
-
-books = [...Array(5)].map(() => new Book());
-renderBooks(books);
+shelf = new Shelf();
+modal = new Modal(shelf);
+shelf.setModal(modal);
+shelf.renderBooks();
